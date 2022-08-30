@@ -153,4 +153,45 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.contains('Talking About Testing')
     })
 
+    Cypress._.times(3, () => {
+        it('checa 3x se a mensagem de erro aparece e desaparece depois de 3 segundos', () => {
+            cy.clock()
+            cy.contains('button', 'Enviar').click()
+            cy.get('.error').should('be.visible')
+    
+            cy.tick(3100)
+            cy.get('.error').should('not.be.visible')
+        })
+    })
+
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+        cy.get('.success').should('not.be.visible')
+        .invoke('show').should('be.visible')
+
+        cy.get('.error').should('not.be.visible')
+        .invoke('show').should('be.visible')
+
+        cy.get('.success').should('be.visible')
+        .invoke('hide').should('be.not.visible')
+
+        cy.get('.error').should('be.visible')
+        .invoke('hide').should('not.be.visible')
+    })
+
+    it('preenche a area de texto usando o comando invoke', () => {
+        cy.get('#open-text-area').invoke('val', 'testando invoke').should('have.value', 'testando invoke')
+    })
+
+    it('faz uma requisição HTTP', () => {
+        cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html').then((resp) => {
+            expect(resp.status).to.eq(200)
+            expect(resp.statusText).to.eq('OK')
+            expect(resp.body).to.have.string('CAC TAT')
+        }) 
+    })
+
+    it('caça ao gato', () => {
+      cy.get('#cat').invoke('show').should('be.visible')
+      //te achei gato malandro MUAHAHAHAH 
+    })
 })
