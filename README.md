@@ -1,13 +1,13 @@
-cy-curso-basico
+### cy-curso-basico
 Projeto do curso básico de Cypress feito pela escola TAT na Udemy
 
-Pré requisitos
+## Pré requisitos
 É necessário possuir NodeJs instalado para rodar o projeto
 
-Installação
+## Installação
 Rodar "npm i" no terminal para instalar as dependências
 
-Testes
+## Testes
 Rodar no terminal: 
 "npm run test" para rodar no modo headless
 "npm run cy:open" para abrir o cypress
